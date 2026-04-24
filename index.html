@@ -1,0 +1,1001 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2026 FRC Worlds Division EPA Comparison</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0f172a;
+        --panel: rgba(17, 24, 39, 0.88);
+        --line: rgba(148, 163, 184, 0.18);
+        --text: #e5e7eb;
+        --muted: #94a3b8;
+        --primary: #38bdf8;
+        --secondary: #f97316;
+        --highlight: #22c55e;
+        --border: rgba(148, 163, 184, 0.2);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 30%),
+          radial-gradient(circle at bottom right, rgba(249, 115, 22, 0.16), transparent 24%),
+          #020617;
+      }
+
+      main {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 32px;
+      }
+
+      .subhead {
+        margin-bottom: 18px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .controls,
+      .stats {
+        display: grid;
+        gap: 12px;
+      }
+
+      .controls {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        margin-bottom: 18px;
+      }
+
+      .control,
+      .stat,
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+
+      .control {
+        padding: 14px;
+      }
+
+      .control label {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .control input,
+      .control select,
+      .control button {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        background: rgba(15, 23, 42, 0.95);
+        color: var(--text);
+        font: inherit;
+      }
+
+      .control button {
+        cursor: pointer;
+        background: rgba(30, 41, 59, 0.98);
+      }
+
+      .toggle-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .toggle-row input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+      }
+
+      .status-line {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        margin-bottom: 18px;
+      }
+
+      .axis-notes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .stat {
+        padding: 14px 16px;
+      }
+
+      .stat .label {
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .stat .value {
+        margin-top: 6px;
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .chart-panel {
+        padding: 16px;
+        margin-bottom: 18px;
+      }
+
+      .chart-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .chart-tools {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .zoom-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        background: rgba(15, 23, 42, 0.95);
+        color: var(--text);
+        font: inherit;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .zoom-btn.reset {
+        width: auto;
+        padding: 0 12px;
+        font-size: 14px;
+      }
+
+      .legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .swatch {
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+      }
+
+      .chart-wrap {
+        position: relative;
+        min-height: 680px;
+      }
+
+      svg {
+        width: 100%;
+        height: 680px;
+        display: block;
+        touch-action: none;
+      }
+
+      .grid-label {
+        fill: var(--muted);
+        font-size: 12px;
+      }
+
+      .point {
+        cursor: pointer;
+        transition: r 120ms ease, opacity 120ms ease;
+      }
+
+      .point:hover,
+      .point.active {
+        r: 7.4;
+      }
+
+      .trend {
+        stroke-width: 2;
+        stroke-dasharray: 6 6;
+      }
+
+      .tooltip {
+        position: absolute;
+        pointer-events: none;
+        min-width: 220px;
+        max-width: 280px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(15, 23, 42, 0.96);
+        color: var(--text);
+        opacity: 0;
+        transform: translate(10px, 10px);
+        transition: opacity 90ms ease;
+      }
+
+      .tooltip.visible {
+        opacity: 1;
+      }
+
+      .tooltip .team {
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .tooltip .numbers {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 10px 12px;
+        text-align: left;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+      }
+
+      th {
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      tr:hover td {
+        background: rgba(30, 41, 59, 0.88);
+      }
+
+      tr.hidden {
+        display: none;
+      }
+
+      a {
+        color: #93c5fd;
+      }
+
+      .footer {
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 800px) {
+        main {
+          padding: 16px;
+        }
+
+        h1 {
+          font-size: 28px;
+        }
+
+        .chart-wrap,
+        svg {
+          min-height: 500px;
+          height: 500px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>2026 FRC Worlds Division EPA Dashboard</h1>
+      <div class="subhead">
+        Champs-wide scatter plot using <strong>Teleop EPA</strong> on X and <strong>Auto + Endgame EPA</strong> on Y.
+        Team lists come from <a href="https://www.thebluealliance.com/event/2026cmptx">The Blue Alliance</a>,
+        and scoring breakdowns come from <a href="https://www.statbotics.io/">Statbotics</a>.
+      </div>
+
+      <section class="controls">
+        <div class="control">
+          <label for="divisionSelect">Division</label>
+          <select id="divisionSelect"></select>
+        </div>
+        <div class="control">
+          <label for="compareSelect">Compare To</label>
+          <select id="compareSelect"></select>
+        </div>
+        <div class="control">
+          <label for="teamSearch">Search Teams</label>
+          <input id="teamSearch" type="search" placeholder="Team number or team name">
+        </div>
+        <div class="control">
+          <label for="refreshInterval">Refresh Every</label>
+          <select id="refreshInterval">
+            <option value="30" selected>30 seconds</option>
+            <option value="60">60 seconds</option>
+            <option value="120">120 seconds</option>
+            <option value="300">5 minutes</option>
+          </select>
+        </div>
+        <div class="control">
+          <label>Auto Refresh</label>
+          <div class="toggle-row">
+            <span>Poll latest data.json</span>
+            <input id="autoRefresh" type="checkbox" checked>
+          </div>
+          <div class="status-line" id="refreshStatus">Waiting for next refresh window.</div>
+        </div>
+        <div class="control">
+          <label>&nbsp;</label>
+          <button id="refreshButton" type="button">Refresh Data Now</button>
+        </div>
+      </section>
+
+      <section class="stats" id="stats"></section>
+
+      <section class="axis-notes">
+        <div class="stat">
+          <div class="label">X-Axis: Teleop EPA</div>
+          <div style="margin-top: 8px; color: var(--muted); line-height: 1.5;">
+            Statbotics estimate of a team's teleop scoring contribution. Higher means stronger expected teleop scoring.
+          </div>
+        </div>
+        <div class="stat">
+          <div class="label">Y-Axis: Auto + Endgame EPA</div>
+          <div style="margin-top: 8px; color: var(--muted); line-height: 1.5;">
+            Statbotics estimate of a team's autonomous scoring plus endgame scoring contribution combined.
+          </div>
+        </div>
+      </section>
+
+      <section class="panel chart-panel">
+        <div class="chart-header">
+          <div class="legend" id="legend"></div>
+          <div class="chart-tools">
+            <button class="zoom-btn" id="zoomOut" type="button" aria-label="Zoom out">-</button>
+            <button class="zoom-btn" id="zoomIn" type="button" aria-label="Zoom in">+</button>
+            <button class="zoom-btn reset" id="zoomReset" type="button">Reset</button>
+            <div class="status-line" id="chartStatus"></div>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <svg id="chart" viewBox="0 0 1180 680" aria-label="Scatter plot of FRC worlds divisions"></svg>
+          <div class="tooltip" id="tooltip"></div>
+        </div>
+      </section>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th>Division</th>
+            <th>Teleop</th>
+            <th>Auto</th>
+            <th>Endgame</th>
+            <th>Auto + Endgame</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+
+      <div class="footer" id="footer"></div>
+    </main>
+
+    <script src="./data.js"></script>
+    <script>
+      let dataset = window.CHAMPS_2026_DATA || { championship: {}, divisions: [] };
+      const DIVISION_COLORS = ["#38bdf8", "#f97316", "#22c55e", "#eab308", "#a78bfa", "#f43f5e", "#14b8a6", "#fb7185"];
+      const state = {
+        divisionKey: "all",
+        compareKey: "",
+        query: "",
+        autoRefreshEnabled: true,
+        refreshSeconds: 30,
+        timerId: null
+      };
+      const chartBounds = { width: 1180, height: 680 };
+      let viewBoxState = { x: 0, y: 0, width: chartBounds.width, height: chartBounds.height };
+      let dragState = null;
+      let touchState = null;
+
+      const divisionSelect = document.getElementById("divisionSelect");
+      const compareSelect = document.getElementById("compareSelect");
+      const teamSearch = document.getElementById("teamSearch");
+      const refreshInterval = document.getElementById("refreshInterval");
+      const autoRefresh = document.getElementById("autoRefresh");
+      const refreshButton = document.getElementById("refreshButton");
+      const refreshStatus = document.getElementById("refreshStatus");
+      const statsNode = document.getElementById("stats");
+      const legendNode = document.getElementById("legend");
+      const chartStatus = document.getElementById("chartStatus");
+      const rowsNode = document.getElementById("rows");
+      const footerNode = document.getElementById("footer");
+      const tooltip = document.getElementById("tooltip");
+      const svg = document.getElementById("chart");
+      const zoomOutButton = document.getElementById("zoomOut");
+      const zoomInButton = document.getElementById("zoomIn");
+      const zoomResetButton = document.getElementById("zoomReset");
+      let pointNodes = [];
+
+      init();
+
+      function init() {
+        if (!dataset.divisions || !dataset.divisions.length) {
+          footerNode.textContent = "No local data yet. Run fetch-data.ps1 to populate the dashboard.";
+          return;
+        }
+
+        if (state.divisionKey !== "all") {
+          const preferred = dataset.divisions.find((division) => division.key === state.divisionKey);
+          state.divisionKey = preferred ? preferred.key : dataset.divisions[0].key;
+        }
+        buildDivisionOptions();
+        bindEvents();
+        render();
+        scheduleAutoRefresh();
+      }
+
+      function bindEvents() {
+        divisionSelect.addEventListener("change", () => {
+          state.divisionKey = divisionSelect.value;
+          if (state.compareKey === state.divisionKey) {
+            state.compareKey = "";
+            compareSelect.value = "";
+          }
+          render();
+        });
+
+        compareSelect.addEventListener("change", () => {
+          state.compareKey = compareSelect.value;
+          if (state.compareKey === state.divisionKey) {
+            state.compareKey = "";
+            compareSelect.value = "";
+          }
+          render();
+        });
+
+        teamSearch.addEventListener("input", () => {
+          state.query = teamSearch.value.trim().toLowerCase();
+          applySearch();
+        });
+
+        refreshInterval.addEventListener("change", () => {
+          state.refreshSeconds = Number(refreshInterval.value);
+          scheduleAutoRefresh();
+        });
+
+        autoRefresh.addEventListener("change", () => {
+          state.autoRefreshEnabled = autoRefresh.checked;
+          scheduleAutoRefresh();
+        });
+
+        refreshButton.addEventListener("click", async () => {
+          await refreshData(true);
+        });
+
+        zoomInButton.addEventListener("click", () => zoomAt(0.5, chartBounds.width / 2, chartBounds.height / 2));
+        zoomOutButton.addEventListener("click", () => zoomAt(2, chartBounds.width / 2, chartBounds.height / 2));
+        zoomResetButton.addEventListener("click", resetZoom);
+        svg.addEventListener("wheel", handleWheelZoom, { passive: false });
+        svg.addEventListener("pointerdown", handlePointerDown);
+        svg.addEventListener("pointermove", handlePointerMove);
+        svg.addEventListener("pointerup", handlePointerUp);
+        svg.addEventListener("pointerleave", handlePointerUp);
+        svg.addEventListener("touchstart", handleTouchStart, { passive: false });
+        svg.addEventListener("touchmove", handleTouchMove, { passive: false });
+        svg.addEventListener("touchend", handleTouchEnd);
+      }
+
+      function buildDivisionOptions() {
+        const options = [`<option value="all">All Divisions</option>`].concat(dataset.divisions
+          .map((division) => `<option value="${division.key}">${division.name}</option>`)
+        ).join("");
+
+        divisionSelect.innerHTML = options;
+        divisionSelect.value = state.divisionKey;
+
+        compareSelect.innerHTML = `<option value="">None</option>${dataset.divisions
+          .map((division) => `<option value="${division.key}">${division.name}</option>`)
+          .join("")}`;
+        compareSelect.value = state.compareKey;
+        compareSelect.disabled = state.divisionKey === "all";
+      }
+
+      function getDivision(key) {
+        return dataset.divisions.find((division) => division.key === key);
+      }
+
+      function getActiveDivisions() {
+        if (state.divisionKey === "all") {
+          return dataset.divisions.map((division, index) => ({
+            ...division,
+            color: DIVISION_COLORS[index % DIVISION_COLORS.length],
+            role: division.name
+          }));
+        }
+
+        const divisions = [];
+        const primary = getDivision(state.divisionKey);
+        if (primary) {
+          divisions.push({ ...primary, color: cssVar("--primary"), role: "Primary" });
+        }
+
+        if (state.compareKey) {
+          const compare = getDivision(state.compareKey);
+          if (compare && compare.key !== state.divisionKey) {
+            divisions.push({ ...compare, color: cssVar("--secondary"), role: "Compare" });
+          }
+        }
+
+        return divisions;
+      }
+
+      function render() {
+        const activeDivisions = getActiveDivisions();
+        compareSelect.disabled = state.divisionKey === "all";
+        renderStats(activeDivisions);
+        renderLegend(activeDivisions);
+        renderTable(activeDivisions[0]);
+        renderChart(activeDivisions);
+        renderFooter();
+        applySearch();
+      }
+
+      function renderStats(activeDivisions) {
+        if (state.divisionKey === "all") {
+          const allPoints = activeDivisions.flatMap((division) => division.points);
+          const topTotal = [...allPoints].sort((a, b) => b.total_points - a.total_points)[0];
+          const cards = [
+            { label: "Divisions", value: activeDivisions.length },
+            { label: "Teams", value: allPoints.length },
+            { label: "Avg Teleop", value: mean(allPoints.map((point) => point.teleop_points)).toFixed(2) },
+            { label: "Avg Auto + Endgame", value: mean(allPoints.map((point) => point.auto_endgame_points)).toFixed(2) },
+            { label: "Top Total EPA", value: `${topTotal.team} (${topTotal.total_points.toFixed(2)})` }
+          ];
+
+          statsNode.innerHTML = cards.map((card) => `
+            <div class="stat">
+              <div class="label">${card.label}</div>
+              <div class="value">${card.value}</div>
+            </div>
+          `).join("");
+          return;
+        }
+
+        const cards = activeDivisions.flatMap((division) => {
+          const teleopValues = division.points.map((point) => point.teleop_points);
+          const comboValues = division.points.map((point) => point.auto_endgame_points);
+          const topTotal = [...division.points].sort((a, b) => b.total_points - a.total_points)[0];
+
+          return [
+            { label: `${division.name} Teams`, value: division.team_count },
+            { label: `${division.name} Avg Teleop`, value: mean(teleopValues).toFixed(2) },
+            { label: `${division.name} Avg Auto + Endgame`, value: mean(comboValues).toFixed(2) },
+            { label: `${division.name} Top Total`, value: `${topTotal.team} (${topTotal.total_points.toFixed(2)})` }
+          ];
+        });
+
+        statsNode.innerHTML = cards.map((card) => `
+          <div class="stat">
+            <div class="label">${card.label}</div>
+            <div class="value">${card.value}</div>
+          </div>
+        `).join("");
+      }
+
+      function renderLegend(activeDivisions) {
+        legendNode.innerHTML = activeDivisions.map((division) => `
+          <span class="legend-item">
+            <span class="swatch" style="background:${division.color}"></span>
+            <span>${division.role}: ${division.name}</span>
+          </span>
+        `).join("");
+
+        chartStatus.textContent = state.divisionKey === "all"
+          ? "Showing all Houston divisions together. Use zoom or pinch to inspect clusters."
+          : state.compareKey
+          ? "Overlaying both divisions on the same axes for direct comparison."
+          : "Showing one division at a time.";
+      }
+
+      function renderTable(primaryDivision) {
+        const tablePoints = state.divisionKey === "all"
+          ? getActiveDivisions().flatMap((division) => division.points.map((point) => ({ ...point, division_name: division.name })))
+          : primaryDivision.points.map((point) => ({ ...point, division_name: primaryDivision.name }));
+
+        rowsNode.innerHTML = [...tablePoints]
+          .sort((a, b) => b.total_points - a.total_points)
+          .map((point) => `
+            <tr data-search="${escapeHtml(point.search)}">
+              <td><a href="${point.tba_url}" target="_blank" rel="noreferrer">${point.team} ${escapeHtml(point.team_name)}</a></td>
+              <td>${point.division_name}</td>
+              <td>${point.teleop_points.toFixed(2)}</td>
+              <td>${point.auto_points.toFixed(2)}</td>
+              <td>${point.endgame_points.toFixed(2)}</td>
+              <td>${point.auto_endgame_points.toFixed(2)}</td>
+              <td>${point.total_points.toFixed(2)}</td>
+            </tr>
+          `).join("");
+      }
+
+      function renderChart(activeDivisions) {
+        const width = chartBounds.width;
+        const height = chartBounds.height;
+        const margin = { top: 24, right: 28, bottom: 72, left: 78 };
+        const innerWidth = width - margin.left - margin.right;
+        const innerHeight = height - margin.top - margin.bottom;
+        const allPoints = activeDivisions.flatMap((division) =>
+          division.points.map((point) => ({ ...point, division_name: division.name, color: division.color }))
+        );
+
+        const maxX = niceMax(Math.max(...allPoints.map((point) => point.teleop_points)));
+        const maxY = niceMax(Math.max(...allPoints.map((point) => point.auto_endgame_points)));
+        const xTicks = buildTicks(maxX);
+        const yTicks = buildTicks(maxY);
+
+        const scaleX = (value) => margin.left + (value / maxX) * innerWidth;
+        const scaleY = (value) => height - margin.bottom - (value / maxY) * innerHeight;
+
+        const grid = [];
+        for (const tick of xTicks) {
+          const x = scaleX(tick);
+          grid.push(`<line x1="${x}" y1="${margin.top}" x2="${x}" y2="${height - margin.bottom}" stroke="${cssVar("--line")}" />`);
+          grid.push(`<text class="grid-label" x="${x}" y="${height - margin.bottom + 24}" text-anchor="middle">${tick}</text>`);
+        }
+
+        for (const tick of yTicks) {
+          const y = scaleY(tick);
+          grid.push(`<line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="${cssVar("--line")}" />`);
+          grid.push(`<text class="grid-label" x="${margin.left - 12}" y="${y + 4}" text-anchor="end">${tick}</text>`);
+        }
+
+        const circles = allPoints.map((point, index) => `
+          <circle
+            class="point"
+            data-index="${index}"
+            data-search="${escapeHtml(point.search)}"
+            cx="${scaleX(point.teleop_points)}"
+            cy="${scaleY(point.auto_endgame_points)}"
+            r="5.4"
+            fill="${point.color}"
+            fill-opacity="0.78"
+            stroke="rgba(255,255,255,0.8)"
+            stroke-width="1"
+          />
+        `).join("");
+
+        const meanLines = activeDivisions.map((division) => {
+          const xMean = mean(division.points.map((point) => point.teleop_points));
+          const yMean = mean(division.points.map((point) => point.auto_endgame_points));
+          return `
+            <line class="trend" x1="${scaleX(xMean)}" y1="${margin.top}" x2="${scaleX(xMean)}" y2="${height - margin.bottom}" stroke="${division.color}" />
+            <line class="trend" x1="${margin.left}" y1="${scaleY(yMean)}" x2="${width - margin.right}" y2="${scaleY(yMean)}" stroke="${division.color}" />
+          `;
+        }).join("");
+
+        svg.innerHTML = `
+          <g>${grid.join("")}</g>
+          <line x1="${margin.left}" y1="${height - margin.bottom}" x2="${width - margin.right}" y2="${height - margin.bottom}" stroke="rgba(226,232,240,0.75)" />
+          <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${height - margin.bottom}" stroke="rgba(226,232,240,0.75)" />
+          ${meanLines}
+          <text x="${width / 2}" y="${height - 20}" fill="var(--text)" text-anchor="middle">Teleop EPA</text>
+          <text x="24" y="${height / 2}" fill="var(--text)" text-anchor="middle" transform="rotate(-90 24 ${height / 2})">Auto + Endgame EPA</text>
+          ${circles}
+        `;
+
+        pointNodes = [...svg.querySelectorAll(".point")];
+        pointNodes.forEach((node) => {
+          const point = allPoints[Number(node.dataset.index)];
+          node.addEventListener("mouseenter", (event) => showTooltip(event, point, node));
+          node.addEventListener("mousemove", moveTooltip);
+          node.addEventListener("mouseleave", () => hideTooltip(node));
+        });
+        resetZoom();
+      }
+
+      function showTooltip(event, point, node) {
+        node.classList.add("active");
+        tooltip.classList.add("visible");
+        tooltip.innerHTML = `
+          <div class="team">${point.team} ${escapeHtml(point.team_name)} <span style="color:${point.color}">(${point.division_name})</span></div>
+          <div class="numbers">
+            Teleop: ${point.teleop_points.toFixed(2)}<br>
+            Auto: ${point.auto_points.toFixed(2)}<br>
+            Endgame: ${point.endgame_points.toFixed(2)}<br>
+            Auto + Endgame: ${point.auto_endgame_points.toFixed(2)}<br>
+            Total: ${point.total_points.toFixed(2)}
+          </div>
+        `;
+        moveTooltip(event);
+      }
+
+      function moveTooltip(event) {
+        const bounds = svg.getBoundingClientRect();
+        tooltip.style.left = `${event.clientX - bounds.left + 12}px`;
+        tooltip.style.top = `${event.clientY - bounds.top + 12}px`;
+      }
+
+      function hideTooltip(node) {
+        node.classList.remove("active");
+        tooltip.classList.remove("visible");
+      }
+
+      function applySearch() {
+        const query = state.query;
+
+        [...rowsNode.querySelectorAll("tr")].forEach((row) => {
+          const matches = !query || row.dataset.search.includes(query);
+          row.classList.toggle("hidden", !matches);
+        });
+
+        pointNodes.forEach((node) => {
+          const matches = !query || node.dataset.search.includes(query);
+          node.style.opacity = matches ? "1" : "0.12";
+          node.style.strokeWidth = matches && query ? "1.8" : "1";
+        });
+      }
+
+      async function refreshData(manual) {
+        refreshStatus.textContent = manual ? "Refreshing now..." : "Auto-refreshing...";
+        try {
+          const response = await fetch(`./data.json?ts=${Date.now()}`, { cache: "no-store" });
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          dataset = await response.json();
+          buildDivisionOptions();
+          if (state.divisionKey !== "all" && !getDivision(state.divisionKey)) {
+            state.divisionKey = dataset.divisions[0].key;
+            divisionSelect.value = state.divisionKey;
+          }
+          if (state.compareKey && !getDivision(state.compareKey)) {
+            state.compareKey = "";
+            compareSelect.value = "";
+          }
+          render();
+          refreshStatus.textContent = `Last refresh: ${new Date().toLocaleTimeString()}`;
+        } catch (error) {
+          refreshStatus.textContent = `Refresh failed: ${error.message}`;
+        }
+      }
+
+      function scheduleAutoRefresh() {
+        if (state.timerId) {
+          clearInterval(state.timerId);
+          state.timerId = null;
+        }
+
+        if (!state.autoRefreshEnabled) {
+          refreshStatus.textContent = "Auto refresh is off.";
+          return;
+        }
+
+        refreshStatus.textContent = `Auto refresh every ${state.refreshSeconds} seconds.`;
+        state.timerId = setInterval(() => {
+          refreshData(false);
+        }, state.refreshSeconds * 1000);
+      }
+
+      function renderFooter() {
+        const generatedAt = dataset.championship.generated_at || "unknown";
+        footerNode.innerHTML = `
+          Generated: <strong>${generatedAt}</strong> UTC.<br>
+          Data used: current Statbotics <code>team_event</code> EPA breakdown snapshots for each 2026 Houston division event.<br>
+          This is <strong>not</strong> district/regional advancement points. It is Statbotics EPA component data tied to the current division event entries.
+        `;
+      }
+
+      function resetZoom() {
+        viewBoxState = { x: 0, y: 0, width: chartBounds.width, height: chartBounds.height };
+        applyViewBox();
+      }
+
+      function applyViewBox() {
+        svg.setAttribute("viewBox", `${viewBoxState.x} ${viewBoxState.y} ${viewBoxState.width} ${viewBoxState.height}`);
+      }
+
+      function zoomAt(factor, centerX, centerY) {
+        const nextWidth = clamp(viewBoxState.width * factor, chartBounds.width * 0.2, chartBounds.width);
+        const nextHeight = clamp(viewBoxState.height * factor, chartBounds.height * 0.2, chartBounds.height);
+        const ratioX = (centerX - viewBoxState.x) / viewBoxState.width;
+        const ratioY = (centerY - viewBoxState.y) / viewBoxState.height;
+        const nextX = centerX - nextWidth * ratioX;
+        const nextY = centerY - nextHeight * ratioY;
+
+        viewBoxState = clampViewBox({
+          x: nextX,
+          y: nextY,
+          width: nextWidth,
+          height: nextHeight
+        });
+        applyViewBox();
+      }
+
+      function panBy(deltaX, deltaY) {
+        viewBoxState = clampViewBox({
+          x: viewBoxState.x + deltaX,
+          y: viewBoxState.y + deltaY,
+          width: viewBoxState.width,
+          height: viewBoxState.height
+        });
+        applyViewBox();
+      }
+
+      function clampViewBox(next) {
+        const maxX = chartBounds.width - next.width;
+        const maxY = chartBounds.height - next.height;
+        return {
+          x: clamp(next.x, 0, Math.max(0, maxX)),
+          y: clamp(next.y, 0, Math.max(0, maxY)),
+          width: next.width,
+          height: next.height
+        };
+      }
+
+      function handleWheelZoom(event) {
+        event.preventDefault();
+        const point = getSvgPoint(event.clientX, event.clientY);
+        zoomAt(event.deltaY > 0 ? 1.2 : 0.85, point.x, point.y);
+      }
+
+      function handlePointerDown(event) {
+        if (event.pointerType === "mouse" && event.button !== 0) {
+          return;
+        }
+        dragState = {
+          x: event.clientX,
+          y: event.clientY,
+          startViewBox: { ...viewBoxState }
+        };
+        svg.setPointerCapture(event.pointerId);
+      }
+
+      function handlePointerMove(event) {
+        if (!dragState) {
+          return;
+        }
+        const rect = svg.getBoundingClientRect();
+        const scaleX = viewBoxState.width / rect.width;
+        const scaleY = viewBoxState.height / rect.height;
+        const dx = (event.clientX - dragState.x) * scaleX;
+        const dy = (event.clientY - dragState.y) * scaleY;
+        viewBoxState = clampViewBox({
+          x: dragState.startViewBox.x - dx,
+          y: dragState.startViewBox.y - dy,
+          width: dragState.startViewBox.width,
+          height: dragState.startViewBox.height
+        });
+        applyViewBox();
+      }
+
+      function handlePointerUp(event) {
+        if (dragState) {
+          dragState = null;
+        }
+        if (event.pointerId !== undefined && svg.hasPointerCapture(event.pointerId)) {
+          svg.releasePointerCapture(event.pointerId);
+        }
+      }
+
+      function handleTouchStart(event) {
+        if (event.touches.length === 2) {
+          event.preventDefault();
+          touchState = {
+            distance: getTouchDistance(event.touches),
+            center: getTouchCenter(event.touches),
+            startViewBox: { ...viewBoxState }
+          };
+        }
+      }
+
+      function handleTouchMove(event) {
+        if (event.touches.length === 2 && touchState) {
+          event.preventDefault();
+          const currentDistance = getTouchDistance(event.touches);
+          const center = getTouchCenter(event.touches);
+          const zoomFactor = touchState.distance / currentDistance;
+          viewBoxState = { ...touchState.startViewBox };
+          zoomAt(zoomFactor, center.x, center.y);
+        }
+      }
+
+      function handleTouchEnd() {
+        if (!touchState) {
+          return;
+        }
+        touchState = null;
+      }
+
+      function getSvgPoint(clientX, clientY) {
+        const rect = svg.getBoundingClientRect();
+        const x = viewBoxState.x + ((clientX - rect.left) / rect.width) * viewBoxState.width;
+        const y = viewBoxState.y + ((clientY - rect.top) / rect.height) * viewBoxState.height;
+        return { x, y };
+      }
+
+      function getTouchCenter(touches) {
+        const a = getSvgPoint(touches[0].clientX, touches[0].clientY);
+        const b = getSvgPoint(touches[1].clientX, touches[1].clientY);
+        return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+      }
+
+      function getTouchDistance(touches) {
+        const dx = touches[0].clientX - touches[1].clientX;
+        const dy = touches[0].clientY - touches[1].clientY;
+        return Math.hypot(dx, dy);
+      }
+
+      function mean(values) {
+        return values.reduce((sum, value) => sum + value, 0) / values.length;
+      }
+
+      function niceMax(value) {
+        return Math.ceil(value / 10) * 10;
+      }
+
+      function buildTicks(max) {
+        const step = max <= 80 ? 10 : 20;
+        const ticks = [];
+        for (let tick = 0; tick <= max; tick += step) {
+          ticks.push(tick);
+        }
+        return ticks;
+      }
+
+      function cssVar(name) {
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      }
+
+      function clamp(value, min, max) {
+        return Math.min(Math.max(value, min), max);
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+    </script>
+  </body>
+</html>
