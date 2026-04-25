@@ -2,7 +2,7 @@
   "championship": {
     "key": "2026cmptx",
     "name": "2026 FRC World Championship - Houston",
-    "generated_at": "2026-04-25T11:36:47Z",
+    "generated_at": "2026-04-25T14:12:29Z",
     "source_notes": [
       "Team lists scraped from The Blue Alliance division event pages",
       "EPA breakdown values fetched from Statbotics team_event endpoints",
@@ -1006,6 +1006,18 @@
           "search": "6800 valor"
         },
         {
+          "team": 5987,
+          "team_name": "Galaxia in memory of David Zohar",
+          "teleop_points": 111.97,
+          "auto_points": 24.28,
+          "endgame_points": 61.01,
+          "auto_endgame_points": 85.29,
+          "total_points": 197.26,
+          "statbotics_url": "https://www.statbotics.io/team/5987",
+          "tba_url": "https://www.thebluealliance.com/team/5987",
+          "search": "5987 galaxia in memory of david zohar"
+        },
+        {
           "team": 9068,
           "team_name": "The Chargers",
           "teleop_points": 111.74,
@@ -1690,18 +1702,6 @@
           "search": "7567 sesi senai octopus"
         },
         {
-          "team": 5987,
-          "team_name": "Galaxia in memory of David Zohar",
-          "teleop_points": 33.67,
-          "auto_points": 13.75,
-          "endgame_points": 15.62,
-          "auto_endgame_points": 29.37,
-          "total_points": 63.04,
-          "statbotics_url": "https://www.statbotics.io/team/5987",
-          "tba_url": "https://www.thebluealliance.com/team/5987",
-          "search": "5987 galaxia in memory of david zohar"
-        },
-        {
           "team": 11318,
           "team_name": "Freedom Robotics",
           "teleop_points": 32.72,
@@ -2216,6 +2216,18 @@
           "search": "1629 garrett coalition (gaco)"
         },
         {
+          "team": 3339,
+          "team_name": "BumbleB",
+          "teleop_points": 69.73,
+          "auto_points": 28.47,
+          "endgame_points": 32.36,
+          "auto_endgame_points": 60.83,
+          "total_points": 130.58,
+          "statbotics_url": "https://www.statbotics.io/team/3339",
+          "tba_url": "https://www.thebluealliance.com/team/3339",
+          "search": "3339 bumbleb"
+        },
+        {
           "team": 6941,
           "team_name": "IronPulse Robotics",
           "teleop_points": 71.74,
@@ -2466,18 +2478,6 @@
           "statbotics_url": "https://www.statbotics.io/team/1939",
           "tba_url": "https://www.thebluealliance.com/team/1939",
           "search": "1939 the kuhnights"
-        },
-        {
-          "team": 3339,
-          "team_name": "BumbleB",
-          "teleop_points": 46.91,
-          "auto_points": 19.15,
-          "endgame_points": 21.77,
-          "auto_endgame_points": 40.92,
-          "total_points": 87.84,
-          "statbotics_url": "https://www.statbotics.io/team/3339",
-          "tba_url": "https://www.thebluealliance.com/team/3339",
-          "search": "3339 bumbleb"
         },
         {
           "team": 9175,
@@ -2766,6 +2766,18 @@
           "search": "7769 the crew"
         },
         {
+          "team": 1690,
+          "team_name": "Orbit",
+          "teleop_points": 143.22,
+          "auto_points": 49.99,
+          "endgame_points": 51.93,
+          "auto_endgame_points": 101.92,
+          "total_points": 245.15,
+          "statbotics_url": "https://www.statbotics.io/team/1690",
+          "tba_url": "https://www.thebluealliance.com/team/1690",
+          "search": "1690 orbit"
+        },
+        {
           "team": 9496,
           "team_name": "LYNK",
           "teleop_points": 141.32,
@@ -2776,6 +2788,18 @@
           "statbotics_url": "https://www.statbotics.io/team/9496",
           "tba_url": "https://www.thebluealliance.com/team/9496",
           "search": "9496 lynk"
+        },
+        {
+          "team": 2231,
+          "team_name": "OnyxTronix",
+          "teleop_points": 137.35,
+          "auto_points": 48.53,
+          "endgame_points": 40.97,
+          "auto_endgame_points": 89.5,
+          "total_points": 226.85,
+          "statbotics_url": "https://www.statbotics.io/team/2231",
+          "tba_url": "https://www.thebluealliance.com/team/2231",
+          "search": "2231 onyxtronix"
         },
         {
           "team": 1768,
@@ -3078,18 +3102,6 @@
           "search": "7915 ripon robotics"
         },
         {
-          "team": 1690,
-          "team_name": "Orbit",
-          "teleop_points": 69.47,
-          "auto_points": 28.36,
-          "endgame_points": 32.24,
-          "auto_endgame_points": 60.6,
-          "total_points": 130.09,
-          "statbotics_url": "https://www.statbotics.io/team/1690",
-          "tba_url": "https://www.thebluealliance.com/team/1690",
-          "search": "1690 orbit"
-        },
-        {
           "team": 4087,
           "team_name": "Voodoo Voltage",
           "teleop_points": 78.32,
@@ -3388,18 +3400,6 @@
           "statbotics_url": "https://www.statbotics.io/team/3753",
           "tba_url": "https://www.thebluealliance.com/team/3753",
           "search": "3753 bulahbots!"
-        },
-        {
-          "team": 2231,
-          "team_name": "OnyxTronix",
-          "teleop_points": 49.24,
-          "auto_points": 20.11,
-          "endgame_points": 22.85,
-          "auto_endgame_points": 42.96,
-          "total_points": 92.21,
-          "statbotics_url": "https://www.statbotics.io/team/2231",
-          "tba_url": "https://www.thebluealliance.com/team/2231",
-          "search": "2231 onyxtronix"
         },
         {
           "team": 3243,
@@ -5258,6 +5258,18 @@
           "search": "2619 the charge"
         },
         {
+          "team": 2096,
+          "team_name": "RoboActive",
+          "teleop_points": 41.93,
+          "auto_points": 17.12,
+          "endgame_points": 19.46,
+          "auto_endgame_points": 36.58,
+          "total_points": 78.51,
+          "statbotics_url": "https://www.statbotics.io/team/2096",
+          "tba_url": "https://www.thebluealliance.com/team/2096",
+          "search": "2096 roboactive"
+        },
+        {
           "team": 3536,
           "team_name": "Electro Eagles",
           "teleop_points": 48.09,
@@ -5340,18 +5352,6 @@
           "statbotics_url": "https://www.statbotics.io/team/10217",
           "tba_url": "https://www.thebluealliance.com/team/10217",
           "search": "10217 catahoula blue dogs"
-        },
-        {
-          "team": 2096,
-          "team_name": "RoboActive",
-          "teleop_points": 30.23,
-          "auto_points": 12.34,
-          "endgame_points": 14.03,
-          "auto_endgame_points": 26.37,
-          "total_points": 56.6,
-          "statbotics_url": "https://www.statbotics.io/team/2096",
-          "tba_url": "https://www.thebluealliance.com/team/2096",
-          "search": "2096 roboactive"
         },
         {
           "team": 6652,
@@ -5616,6 +5616,18 @@
           "search": "6090 wayland wildcats"
         },
         {
+          "team": 2630,
+          "team_name": "Thunderbolts",
+          "teleop_points": 120.4,
+          "auto_points": 40.94,
+          "endgame_points": 42.94,
+          "auto_endgame_points": 83.88,
+          "total_points": 204.27,
+          "statbotics_url": "https://www.statbotics.io/team/2630",
+          "tba_url": "https://www.thebluealliance.com/team/2630",
+          "search": "2630 thunderbolts"
+        },
+        {
           "team": 2905,
           "team_name": "Sultans of Turkiye",
           "teleop_points": 124.58,
@@ -5638,6 +5650,18 @@
           "statbotics_url": "https://www.statbotics.io/team/7457",
           "tba_url": "https://www.thebluealliance.com/team/7457",
           "search": "7457 supurdueper robotics"
+        },
+        {
+          "team": 7039,
+          "team_name": "❌⭕",
+          "teleop_points": 107.19,
+          "auto_points": 32.08,
+          "endgame_points": 50.19,
+          "auto_endgame_points": 82.27,
+          "total_points": 189.46,
+          "statbotics_url": "https://www.statbotics.io/team/7039",
+          "tba_url": "https://www.thebluealliance.com/team/7039",
+          "search": "7039 ❌⭕"
         },
         {
           "team": 4481,
@@ -5940,6 +5964,18 @@
           "search": "5462 2paw robotics"
         },
         {
+          "team": 3075,
+          "team_name": "Ha-Dream Team",
+          "teleop_points": 62.92,
+          "auto_points": 23.28,
+          "endgame_points": 15.87,
+          "auto_endgame_points": 39.15,
+          "total_points": 102.07,
+          "statbotics_url": "https://www.statbotics.io/team/3075",
+          "tba_url": "https://www.thebluealliance.com/team/3075",
+          "search": "3075 ha-dream team"
+        },
+        {
           "team": 3707,
           "team_name": "TechnoDogs",
           "teleop_points": 54.63,
@@ -6060,18 +6096,6 @@
           "search": "3245 ravens"
         },
         {
-          "team": 2630,
-          "team_name": "Thunderbolts",
-          "teleop_points": 46.36,
-          "auto_points": 18.93,
-          "endgame_points": 21.52,
-          "auto_endgame_points": 40.45,
-          "total_points": 86.81,
-          "statbotics_url": "https://www.statbotics.io/team/2630",
-          "tba_url": "https://www.thebluealliance.com/team/2630",
-          "search": "2630 thunderbolts"
-        },
-        {
           "team": 263,
           "team_name": "Aftershock",
           "teleop_points": 41.46,
@@ -6118,18 +6142,6 @@
           "statbotics_url": "https://www.statbotics.io/team/8873",
           "tba_url": "https://www.thebluealliance.com/team/8873",
           "search": "8873 rockefeller robotics"
-        },
-        {
-          "team": 7039,
-          "team_name": "❌⭕",
-          "teleop_points": 36.96,
-          "auto_points": 15.09,
-          "endgame_points": 17.15,
-          "auto_endgame_points": 32.24,
-          "total_points": 69.21,
-          "statbotics_url": "https://www.statbotics.io/team/7039",
-          "tba_url": "https://www.thebluealliance.com/team/7039",
-          "search": "7039 ❌⭕"
         },
         {
           "team": 3492,
@@ -6180,16 +6192,16 @@
           "search": "343 metal-in-motion"
         },
         {
-          "team": 3075,
-          "team_name": "Ha-Dream Team",
-          "teleop_points": 32.66,
-          "auto_points": 13.33,
-          "endgame_points": 15.16,
-          "auto_endgame_points": 28.49,
-          "total_points": 61.15,
-          "statbotics_url": "https://www.statbotics.io/team/3075",
-          "tba_url": "https://www.thebluealliance.com/team/3075",
-          "search": "3075 ha-dream team"
+          "team": 6925,
+          "team_name": "W.A.Robotics",
+          "teleop_points": 28.89,
+          "auto_points": 10.15,
+          "endgame_points": 20.78,
+          "auto_endgame_points": 30.93,
+          "total_points": 59.82,
+          "statbotics_url": "https://www.statbotics.io/team/6925",
+          "tba_url": "https://www.thebluealliance.com/team/6925",
+          "search": "6925 w.a.robotics"
         },
         {
           "team": 353,
@@ -6202,18 +6214,6 @@
           "statbotics_url": "https://www.statbotics.io/team/353",
           "tba_url": "https://www.thebluealliance.com/team/353",
           "search": "353 pobots"
-        },
-        {
-          "team": 6925,
-          "team_name": "W.A.Robotics",
-          "teleop_points": 28.89,
-          "auto_points": 10.15,
-          "endgame_points": 20.78,
-          "auto_endgame_points": 30.93,
-          "total_points": 59.82,
-          "statbotics_url": "https://www.statbotics.io/team/6925",
-          "tba_url": "https://www.thebluealliance.com/team/6925",
-          "search": "6925 w.a.robotics"
         },
         {
           "team": 10526,
@@ -6922,6 +6922,18 @@
           "search": "3276 toolcats"
         },
         {
+          "team": 5951,
+          "team_name": "Makers Assemble",
+          "teleop_points": 64.84,
+          "auto_points": 8.16,
+          "endgame_points": 51.78,
+          "auto_endgame_points": 59.94,
+          "total_points": 124.78,
+          "statbotics_url": "https://www.statbotics.io/team/5951",
+          "tba_url": "https://www.thebluealliance.com/team/5951",
+          "search": "5951 makers assemble"
+        },
+        {
           "team": 930,
           "team_name": "Mukwonago BEARs",
           "teleop_points": 73.45,
@@ -7030,6 +7042,30 @@
           "search": "3354 prepatec - tecdroid"
         },
         {
+          "team": 4590,
+          "team_name": "GreenBlitz",
+          "teleop_points": 56.46,
+          "auto_points": 21.34,
+          "endgame_points": 27.2,
+          "auto_endgame_points": 48.54,
+          "total_points": 105.0,
+          "statbotics_url": "https://www.statbotics.io/team/4590",
+          "tba_url": "https://www.thebluealliance.com/team/4590",
+          "search": "4590 greenblitz"
+        },
+        {
+          "team": 1577,
+          "team_name": "Steampunk",
+          "teleop_points": 58.82,
+          "auto_points": 24.97,
+          "endgame_points": 20.68,
+          "auto_endgame_points": 45.65,
+          "total_points": 104.47,
+          "statbotics_url": "https://www.statbotics.io/team/1577",
+          "tba_url": "https://www.thebluealliance.com/team/1577",
+          "search": "1577 steampunk"
+        },
+        {
           "team": 9029,
           "team_name": "Team NF",
           "teleop_points": 60.53,
@@ -7078,18 +7114,6 @@
           "search": "5216 e-ville empire"
         },
         {
-          "team": 5951,
-          "team_name": "Makers Assemble",
-          "teleop_points": 45.93,
-          "auto_points": 18.75,
-          "endgame_points": 21.31,
-          "auto_endgame_points": 40.06,
-          "total_points": 86.0,
-          "statbotics_url": "https://www.statbotics.io/team/5951",
-          "tba_url": "https://www.thebluealliance.com/team/5951",
-          "search": "5951 makers assemble"
-        },
-        {
           "team": 2586,
           "team_name": "Copper Bots",
           "teleop_points": 42.08,
@@ -7126,18 +7150,6 @@
           "search": "10903 the ionizers"
         },
         {
-          "team": 1577,
-          "team_name": "Steampunk",
-          "teleop_points": 36.85,
-          "auto_points": 15.05,
-          "endgame_points": 17.1,
-          "auto_endgame_points": 32.15,
-          "total_points": 69.01,
-          "statbotics_url": "https://www.statbotics.io/team/1577",
-          "tba_url": "https://www.thebluealliance.com/team/1577",
-          "search": "1577 steampunk"
-        },
-        {
           "team": 1807,
           "team_name": "Redbird Robotics",
           "teleop_points": 31.88,
@@ -7162,16 +7174,16 @@
           "search": "10553 orange overdrive"
         },
         {
-          "team": 4590,
-          "team_name": "GreenBlitz",
-          "teleop_points": 32.8,
-          "auto_points": 13.39,
-          "endgame_points": 15.22,
-          "auto_endgame_points": 28.61,
-          "total_points": 61.42,
-          "statbotics_url": "https://www.statbotics.io/team/4590",
-          "tba_url": "https://www.thebluealliance.com/team/4590",
-          "search": "4590 greenblitz"
+          "team": 10935,
+          "team_name": "Krono",
+          "teleop_points": 39.74,
+          "auto_points": 13.44,
+          "endgame_points": 3.01,
+          "auto_endgame_points": 16.45,
+          "total_points": 56.19,
+          "statbotics_url": "https://www.statbotics.io/team/10935",
+          "tba_url": "https://www.thebluealliance.com/team/10935",
+          "search": "10935 krono"
         },
         {
           "team": 10291,
@@ -7256,18 +7268,6 @@
           "statbotics_url": "https://www.statbotics.io/team/1884",
           "tba_url": "https://www.thebluealliance.com/team/1884",
           "search": "1884 griffins"
-        },
-        {
-          "team": 10935,
-          "team_name": "Krono",
-          "teleop_points": 12.68,
-          "auto_points": 5.18,
-          "endgame_points": 5.88,
-          "auto_endgame_points": 11.06,
-          "total_points": 23.74,
-          "statbotics_url": "https://www.statbotics.io/team/10935",
-          "tba_url": "https://www.thebluealliance.com/team/10935",
-          "search": "10935 krono"
         },
         {
           "team": 11463,
