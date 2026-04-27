@@ -2,7 +2,7 @@ window.CHAMPS_2026_DATA = {
   "championship": {
     "key": "2026cmptx",
     "name": "2026 FRC World Championship - Houston",
-    "generated_at": "2026-04-27T09:18:17Z",
+    "generated_at": "2026-04-27T15:34:19Z",
     "source_notes": [
       "Team lists scraped from The Blue Alliance division event pages",
       "EPA breakdown values fetched from Statbotics team_event endpoints",
