@@ -2,7 +2,7 @@
   "championship": {
     "key": "2026cmptx",
     "name": "2026 FRC World Championship - Houston",
-    "generated_at": "2026-04-28T08:02:34Z",
+    "generated_at": "2026-04-28T16:28:04Z",
     "source_notes": [
       "Team lists scraped from The Blue Alliance division event pages",
       "EPA breakdown values fetched from Statbotics team_event endpoints",
@@ -931,7 +931,7 @@
       "short_name": "Curie",
       "tba_url": "https://www.thebluealliance.com/event/2026cur",
       "statbotics_url": "https://api.statbotics.io/v3/event/2026cur",
-      "team_count": 75,
+      "team_count": 74,
       "points": [
         {
           "team": 254,
@@ -1820,18 +1820,6 @@
           "statbotics_url": "https://www.statbotics.io/team/11304",
           "tba_url": "https://www.thebluealliance.com/team/11304",
           "search": "11304 meowbotics - fresnillo plc"
-        },
-        {
-          "team": 11300,
-          "team_name": "ZENITH",
-          "teleop_points": 1.72,
-          "auto_points": 3.93,
-          "endgame_points": 7.13,
-          "auto_endgame_points": 11.06,
-          "total_points": 12.78,
-          "statbotics_url": "https://www.statbotics.io/team/11300",
-          "tba_url": "https://www.thebluealliance.com/team/11300",
-          "search": "11300 zenith"
         }
       ]
     },
@@ -3661,7 +3649,7 @@
       "short_name": "Hopper",
       "tba_url": "https://www.thebluealliance.com/event/2026hop",
       "statbotics_url": "https://api.statbotics.io/v3/event/2026hop",
-      "team_count": 75,
+      "team_count": 74,
       "points": [
         {
           "team": 2056,
@@ -4502,18 +4490,6 @@
           "statbotics_url": "https://www.statbotics.io/team/7287",
           "tba_url": "https://www.thebluealliance.com/team/7287",
           "search": "7287 esquimalt atom smashers"
-        },
-        {
-          "team": 11303,
-          "team_name": "BEZOAR ROBOTICS",
-          "teleop_points": 13.68,
-          "auto_points": 5.07,
-          "endgame_points": 6.67,
-          "auto_endgame_points": 11.74,
-          "total_points": 25.42,
-          "statbotics_url": "https://www.statbotics.io/team/11303",
-          "tba_url": "https://www.thebluealliance.com/team/11303",
-          "search": "11303 bezoar robotics"
         },
         {
           "team": 11024,
